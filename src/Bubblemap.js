@@ -1,4 +1,7 @@
-
+import React from 'react';
+import rd3 from 'react-d3-library';
+// const RD3Component = rd3.Component;
+const RD3Component = rd3.Component;
 // The svg
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
