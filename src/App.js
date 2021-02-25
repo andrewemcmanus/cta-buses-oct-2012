@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Mapping from './Mapping';
+import Mapping from './Mapping.js';
 
 function App() {
   return (

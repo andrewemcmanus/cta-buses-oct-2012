@@ -33,7 +33,9 @@ def latlong_js():
         lat = float(i['latitude'])
         long = float(i['longitude'])
         latlong.append([lat, long])
-        coordinates = np.array(latlong)
+    coordinates = np.array(latlong)
     return coordinates
 result = latlong_js()
+# print(result)
+# result.to_csv('coordinates_modified.csv')
 savetxt('coordinates.csv', result, delimiter=',')
