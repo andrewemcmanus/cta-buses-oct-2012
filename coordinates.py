@@ -2,6 +2,7 @@ import ast
 import numpy as np
 from openpyxl import load_workbook
 import pandas as pd
+from numpy import savetxt
 
 workbook = load_workbook(filename="cta-ridership-avg.-weekday-bus-stop-boardings-in-october-2012.xlsx")
 sheet = workbook.active
@@ -35,4 +36,4 @@ def latlong_js():
         coordinates = np.array(latlong)
     return coordinates
 result = latlong_js()
-print(result)
+savetxt('coordinates.csv', result, delimiter=',')
