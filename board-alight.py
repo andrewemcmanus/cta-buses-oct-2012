@@ -21,18 +21,31 @@ df = pd.DataFrame(values)
 # ast.literal_eval(df[8])
 # df[4] boardings
 # df[5] alightings
-def board_alight_js():
+def board_js():
     board = list(df[4])
-    alight = list(df[5])
     board_floats = []
-    alight_floats = []
-    board_alight = []
     for i in board:
-        lat = float(i['latitude'])
-        board_alight.append([lat, long])
-    coordinates = np.array(latlong)
-    return coordinates
-result = latlong_js()
+        if i == board[0]:
+            print(i)
+        else:
+            bd = float(i)
+            board_floats.append(bd)
+    boardings = np.array(board_floats)
+    return boardings
+def alight_js():
+    alight = list(df[5])
+    alight_floats = []
+    for i in alight:
+        if i == alight[0]:
+            print(i)
+        else:
+            fl = float(i)
+            alight_floats.append(fl)
+    alightings = np.array(alight_floats)
+    return alightings
+result_board = board_js()
+result_alight = alight_js()
 # print(result)
 # result.to_csv('coordinates_modified.csv')
-savetxt('coordinates.csv', result, delimiter=',')
+savetxt('boardings.csv', result_board, delimiter=',')
+savetxt('alightings.csv', result_alight, delimiter=',')

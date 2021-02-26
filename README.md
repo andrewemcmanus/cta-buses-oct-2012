@@ -1,3 +1,5 @@
+# creating a bubble map using daily averages from October 2012
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
