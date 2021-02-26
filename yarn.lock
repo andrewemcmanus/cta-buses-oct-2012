@@ -5110,6 +5110,13 @@
     "es5-ext" "^0.10.50"
     "type" "^1.0.1"
 
+"d3-array@>=2.5":
+  "integrity" "sha512-26clcwmHQEdsLv34oNKq5Ia9tQ26Y/4HqS3dQzF42QBUqymZJ+9PORcN1G52bt37NsL2ABoX4lvyYZc+A9Y0zw=="
+  "resolved" "https://registry.npmjs.org/d3-array/-/d3-array-2.11.0.tgz"
+  "version" "2.11.0"
+  dependencies:
+    "internmap" "^1.0.0"
+
 "d3-collection@1":
   "integrity" "sha512-ii0/r5f4sjKNTfh84Di+DpztYwqKhEyUlKoPrzUFfeSkWxjW49xU2QzO9qrPrNkpdI0XJkfzvmTu8V2Zylln6A=="
   "resolved" "https://registry.npmjs.org/d3-collection/-/d3-collection-1.0.7.tgz"
@@ -5128,6 +5135,13 @@
     "commander" "2"
     "iconv-lite" "0.4"
     "rw" "1"
+
+"d3-geo@^2.0.1":
+  "integrity" "sha512-M6yzGbFRfxzNrVhxDJXzJqSLQ90q1cCyb3EWFZ1LF4eWOBYxFypw7I/NFVBNXKNqxv1bqLathhYvdJ6DC+th3A=="
+  "resolved" "https://registry.npmjs.org/d3-geo/-/d3-geo-2.0.1.tgz"
+  "version" "2.0.1"
+  dependencies:
+    "d3-array" ">=2.5"
 
 "d3-request@^1.0.6":
   "integrity" "sha512-FJj8ySY6GYuAJHZMaCQ83xEYE4KbkPkmxZ3Hu6zA1xxG2GD+z6P+Lyp+zjdsHf0xEbp2xcluDI50rCS855EQ6w=="
@@ -7440,6 +7454,11 @@
     "get-intrinsic" "^1.1.0"
     "has" "^1.0.3"
     "side-channel" "^1.0.4"
+
+"internmap@^1.0.0":
+  "integrity" "sha512-SdoDWwNOTE2n4JWUsLn4KXZGuZPjPF9yyOGc8bnfWnBQh7BD/l80rzSznKc/r4Y0aQ7z3RTk9X+tV4tHBpu+dA=="
+  "resolved" "https://registry.npmjs.org/internmap/-/internmap-1.0.0.tgz"
+  "version" "1.0.0"
 
 "interpret@^0.6.4":
   "integrity" "sha1-/s16GOfOXKar+5U+H4YhOknxYls="
