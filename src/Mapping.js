@@ -1,24 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
-import { csv } from 'd3';
-// import {withRouter} from 'react-router-dom';
-// ***** TRY DIRECTLY IN INDEX.JS? ******
 
-const Mapping = () => {
-  const [ coordinates, setCoordinates ] = useState([]);
-  useEffect(() => {
-    async function getCoordinates() {
-      const coordinates = await csv('coordinates.csv');
-      console.log(coordinates);
-      setCoordinates(coordinates);
-    };
-    getCoordinates();
-  }, []);
-  // console.log(coordinates);
-  return (
-    <p>coordinates</p>
-  )
-}
 export default Mapping;
 
 // export default function() {
