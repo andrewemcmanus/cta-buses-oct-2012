@@ -19,9 +19,8 @@ const App = () => {
   useEffect(() => {
     let coordinates = coords;
     d3.csv(coordinates, function(coordinates) {
-      // const coordinates = coords;
+      // const pairs = coordinates.values();
       setCoordinates(coordinates);
-      console.log(coordinates);
     })
   }, []);
 
