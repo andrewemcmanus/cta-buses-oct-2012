@@ -1,7 +1,7 @@
 import React from 'react';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
-// import * as d3geo from 'd3-geo';
+import { queue } from 'd3';
 // const RD3Component = rd3.Component;
 const RD3Component = rd3.Component;
 // The svg
@@ -10,7 +10,7 @@ var svg = d3.select("svg"),
     height = +svg.attr("height");
 
 // Map and projection
-var projection = d3.geoMercator()
+var projection = d3.geo.mercator()
     .center([0,20])                // GPS of location to zoom on
     .scale(99)                       // This is like the zoom
     .translate([ width/2, height/2 ])
