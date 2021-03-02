@@ -1,6 +1,7 @@
 import React from 'react';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
+// import * as d3geo from 'd3-geo';
 // const RD3Component = rd3.Component;
 const RD3Component = rd3.Component;
 // The svg

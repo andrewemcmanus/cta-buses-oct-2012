@@ -38,4 +38,5 @@ def latlong_js():
 result = latlong_js()
 # print(result)
 # result.to_csv('coordinates_modified.csv')
+# better way than savetxt?
 savetxt('coordinates.csv', result, delimiter=',')
