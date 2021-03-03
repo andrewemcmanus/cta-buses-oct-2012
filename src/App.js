@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Mapping from './Mapping.js';
+import Bubblemap from './Bubblemap.js';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <header className="App-header">
       </header>
       <Mapping />
+      <BubbleMap />
     </div>
   );
 }

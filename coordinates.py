@@ -36,7 +36,7 @@ def latlong_js():
     coordinates = np.array(latlong)
     return coordinates
 result = latlong_js()
-# print(result)
+print(result)
 # result.to_csv('coordinates_modified.csv')
 # better way than savetxt?
-savetxt('coordinates.csv', result, delimiter=',')
+# savetxt('coordinates.csv', result, delimiter=',')

@@ -1,7 +1,7 @@
 import React from 'react';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
-import { queue } from 'd3';
+// import queue from 'd3-queue';
 // const RD3Component = rd3.Component;
 const RD3Component = rd3.Component;
 // The svg
@@ -15,16 +15,16 @@ var projection = d3.geo.mercator()
     .scale(99)                       // This is like the zoom
     .translate([ width/2, height/2 ])
 
-d3.queue()
-  .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")  // World shape
-  .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv") // Position of circles
-  .await(ready);
+// d3.queue()
+//   .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")  // World shape
+//   .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv") // Position of circles
+//   .await(ready);
 
 export default function ready(error, dataGeo, data) {
 
   // Create a color scale
   var allContinent = d3.map(data, function(d){return(d.homecontinent)}).keys()
-  var color = d3.scaleOrdinal()
+  var color = d3.scale.ordinal()
     .domain(allContinent)
     .range(d3.schemePaired);
 

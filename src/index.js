@@ -26,7 +26,7 @@ const App = () => {
   }, []);
 
   return (
-    <div><App /></div>
+    <div><Bubblemap /></div>
   )
 }
 
