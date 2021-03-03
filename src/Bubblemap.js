@@ -16,10 +16,12 @@ var projection = d3.geo.mercator()
     .translate([ width/2, height/2 ])
 
 // d3.queue()
+d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
+d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv");
 //   .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")  // World shape
-//   .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv") // Position of circles
+//   .defer(d3.csv, ) // Position of circles
 //   .await(ready);
-
+// FORMAT FOR dataGeo AND data:
 export default function ready(error, dataGeo, data) {
 
   // Create a color scale
@@ -63,7 +65,7 @@ export default function ready(error, dataGeo, data) {
 
 
 
-  // Add title and explanation
+  // Add title and explanation //
   svg
     .append("text")
       .attr("text-anchor", "end")
