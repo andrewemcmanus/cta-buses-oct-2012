@@ -1,6 +1,7 @@
 import React from 'react';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
+import axios from 'axios';
 // import queue from 'd3-queue';
 // const RD3Component = rd3.Component;
 const RD3Component = rd3.Component;
@@ -13,33 +14,39 @@ var svg = d3.select("svg"),
 var projection = d3.geo.mercator()
     .center([0,20])                // GPS of location to zoom on
     .scale(99)                       // This is like the zoom
-    .translate([ width/2, height/2 ])
+    .translate([ width/2, height/2 ]);
+
+const dataGeo = d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
+console.log(dataGeo);
+const data = d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv");
+console.log(data);
 
 // d3.queue()
-d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv");
+
 //   .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")  // World shape
 //   .defer(d3.csv, ) // Position of circles
 //   .await(ready);
 // FORMAT FOR dataGeo AND data:
-export default function ready(error, dataGeo, data) {
-
+export default function ready(error) {
+  // const dataGeo = axios.get("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
   // Create a color scale
-  var allContinent = d3.map(data, function(d){return(d.homecontinent)}).keys()
+  var allContinent = d3.map(dataGeo, function(d){return(d.homecontinent)}).keys()
   var color = d3.scale.ordinal()
     .domain(allContinent)
     .range(d3.schemePaired);
 
   // Add a scale for bubble size
-  var valueExtent = d3.extent(data, function(d) { return +d.n; })
-  var size = d3.scaleSqrt()
+  var valueExtent = d3.extent(dataGeo, function(d) { return +d.n; })
+  var size = d3.scale.sqrt()
     .domain(valueExtent)  // What's in the data
     .range([ 1, 50])  // Size in pixel
 
   // Draw the map
+  var features = dataGeo.features;
+
   svg.append("g")
       .selectAll("path")
-      .data(dataGeo.features)
+      .data(features)
       .enter()
       .append("path")
         .attr("fill", "#b8b8b8")
