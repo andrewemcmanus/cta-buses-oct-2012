@@ -6,24 +6,9 @@ import * as d3 from 'd3';
 // const RD3Component = rd3.Component;
 const RD3Component = rd3.Component;
 // The svg
-var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
 
-// Map and projection
-var projection = d3.geo.mercator()
-    .center([0,20])                // GPS of location to zoom on
-    .scale(99)                       // This is like the zoom
-    .translate([ width/2, height/2 ]);
 
-const dataGeo = () => {
-  d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
-}
-console.log(dataGeo);
-const data = () => {
-  d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv");
-} 
-console.log(data);
+
 
 // d3.queue()
 
@@ -32,6 +17,19 @@ console.log(data);
 //   .await(ready);
 // FORMAT FOR dataGeo AND data:
 export default function ready(error) {
+  var svg = d3.select("svg"),
+      width = +svg.attr("width"),
+      height = +svg.attr("height");
+
+  // Map and projection
+  var projection = d3.geo.mercator()
+      .center([0,20])                // GPS of location to zoom on
+      .scale(99)                       // This is like the zoom
+      .translate([ width/2, height/2 ]);
+  const dataGeo = d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
+  // console.log(dataGeo.response);
+  const data = d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv");
+  // console.log(data.response);
   // const dataGeo = axios.get("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
   // Create a color scale
   var allContinent = d3.map(dataGeo, function(d){return(d.homecontinent)}).keys()
