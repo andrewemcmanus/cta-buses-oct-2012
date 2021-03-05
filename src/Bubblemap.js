@@ -1,7 +1,7 @@
 import React from 'react';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
-import axios from 'axios';
+// import axios from 'axios';
 // import queue from 'd3-queue';
 // const RD3Component = rd3.Component;
 const RD3Component = rd3.Component;
@@ -16,9 +16,13 @@ var projection = d3.geo.mercator()
     .scale(99)                       // This is like the zoom
     .translate([ width/2, height/2 ]);
 
-const dataGeo = d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
+const dataGeo = () => {
+  d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
+}
 console.log(dataGeo);
-const data = d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv");
+const data = () => {
+  d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv");
+} 
 console.log(data);
 
 // d3.queue()
