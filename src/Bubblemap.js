@@ -15,6 +15,7 @@ var projection = d3.geo.mercator()
     .center([0,20])                // GPS of location to zoom on
     .scale(99)                       // This is like the zoom
     .translate([ width/2, height/2 ]);
+
 var dataGeo = d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
 // console.log(dataGeo.response);
 var data = d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv");
@@ -26,7 +27,7 @@ var data = d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/mas
 //   .await(ready);
 // FORMAT FOR dataGeo AND data
 
-var geoPath = d3.select("svg")
+d3.select("svg")
     .append("g")
     .selectAll("path")
     .data(features)
@@ -40,7 +41,7 @@ var geoPath = d3.select("svg")
     .style("opacity", .3);
 
 // Add circles:
-var circles = d3.select("svg")
+d3.select("svg")
   .selectAll("myCircles")
   .data(data.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
   .enter()
@@ -53,7 +54,7 @@ var circles = d3.select("svg")
     .attr("stroke-width", 1)
     .attr("fill-opacity", .4);
 
-var whereSurfers = d3.select("svg")
+d3.select("svg")
     .append("text")
     .attr("text-anchor", "end")
     .style("fill", "black")
@@ -68,7 +69,7 @@ var whereSurfers = d3.select("svg")
 var valuesToShow = [100,4000,15000];
 var xCircle = 40;
 var xLabel = 90;
-var legend = d3.select("svg")
+d3.select("svg")
   .selectAll("legend")
   .data(valuesToShow)
   .enter()
@@ -80,7 +81,7 @@ var legend = d3.select("svg")
     .attr("stroke", "black")
 
 // Add legend: segments
-var segments = d3.select("svg")
+d3.select("svg")
   .selectAll("legend")
   .data(valuesToShow)
   .enter()
@@ -93,7 +94,7 @@ var segments = d3.select("svg")
     .style('stroke-dasharray', ('2,2'))
 
 // Add legend: labels
-var labels = d3.select("svg")
+d3.select("svg")
   .selectAll("legend")
   .data(valuesToShow)
   .enter()
@@ -104,16 +105,16 @@ var labels = d3.select("svg")
     .style("font-size", 10)
     .attr('alignment-baseline', 'middle');
 
-var allContinent = d3.map(dataGeo, function(d){return(d.homecontinent)}).keys()
-var color = d3.scale.ordinal()
+d3.map(dataGeo, function(d){return(d.homecontinent)}).keys()
+d3.scale.ordinal()
       .domain(allContinent)
       .range(d3.schemePaired);
 
     // Add a scale for bubble size
 var valueExtent = d3.extent(dataGeo, function(d) { return +d.n; })
     var size = d3.scale.sqrt()
-      .domain(valueExtent)  // What's in the data
-      .range([ 1, 50])  // Size in pixel
+      .domain(valueExtent)
+      .range([ 1, 50])
 
     // Draw the map
 var features = dataGeo.features;
