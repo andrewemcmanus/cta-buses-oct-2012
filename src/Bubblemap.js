@@ -3,6 +3,8 @@ import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
 // import axios from 'axios';
 // import queue from 'd3-queue';
+// .style("fill", function(d){ return color(d.homecontinent) }) line 52
+// .domain(allContinent) line 111
 // const RD3Component = rd3.Component;
 const RD3Component = rd3.Component;
 // The svg
@@ -49,11 +51,11 @@ d3.select("svg")
     .attr("cx", function(d){ return projection([+d.homelon, +d.homelat])[0] })
     .attr("cy", function(d){ return projection([+d.homelon, +d.homelat])[1] })
     .attr("r", function(d){ return size(+d.n) })
-    .style("fill", function(d){ return color(d.homecontinent) })
+
     .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
     .attr("stroke-width", 1)
     .attr("fill-opacity", .4);
-
+//
 d3.select("svg")
     .append("text")
     .attr("text-anchor", "end")
@@ -107,7 +109,7 @@ d3.select("svg")
 
 d3.map(dataGeo, function(d){return(d.homecontinent)}).keys()
 d3.scale.ordinal()
-      .domain(allContinent)
+
       .range(d3.schemePaired);
 
     // Add a scale for bubble size

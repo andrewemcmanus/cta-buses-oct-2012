@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
+import * as d3 from 'd3';
 
 const Mapping = () => {
   const [rows, setRows] = useState([])
