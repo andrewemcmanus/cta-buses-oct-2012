@@ -55,7 +55,7 @@ d3.select("svg")
     .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
     .attr("stroke-width", 1)
     .attr("fill-opacity", .4);
-//
+
 d3.select("svg")
     .append("text")
     .attr("text-anchor", "end")
@@ -66,8 +66,6 @@ d3.select("svg")
     .html("WHERE SURFERS LIVE")
     .style("font-size", 14);
 
-
-// Add legend: circles
 var valuesToShow = [100,4000,15000];
 var xCircle = 40;
 var xLabel = 90;
@@ -80,9 +78,8 @@ d3.select("svg")
     .attr("cy", function(d){ return height - size(d) } )
     .attr("r", function(d){ return size(d) })
     .style("fill", "none")
-    .attr("stroke", "black")
+    .attr("stroke", "black");
 
-// Add legend: segments
 d3.select("svg")
   .selectAll("legend")
   .data(valuesToShow)
@@ -95,7 +92,6 @@ d3.select("svg")
     .attr('stroke', 'black')
     .style('stroke-dasharray', ('2,2'))
 
-// Add legend: labels
 d3.select("svg")
   .selectAll("legend")
   .data(valuesToShow)
@@ -107,16 +103,14 @@ d3.select("svg")
     .style("font-size", 10)
     .attr('alignment-baseline', 'middle');
 
-d3.map(dataGeo, function(d){return(d.homecontinent)}).keys()
-d3.scale.ordinal()
+d3.map(dataGeo, function(d){return(d.homecontinent)}).keys();
 
-      .range(d3.schemePaired);
+d3.scale.ordinal().range(d3.schemePaired);
 
     // Add a scale for bubble size
-var valueExtent = d3.extent(dataGeo, function(d) { return +d.n; })
-    var size = d3.scale.sqrt()
-      .domain(valueExtent)
-      .range([ 1, 50])
+var valueExtent = d3.extent(dataGeo, function(d) { return +d.n; });
+
+var size = d3.scale.sqrt().domain(valueExtent).range([ 1, 50]);
 
     // Draw the map
 var features = dataGeo.features;
