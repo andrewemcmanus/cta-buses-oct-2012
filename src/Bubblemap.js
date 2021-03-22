@@ -1,6 +1,9 @@
 import React from 'react';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
+
+// "GROUPDATA" is undefined in d3.js
+
 // import axios from 'axios';
 // import queue from 'd3-queue';
 // .style("fill", function(d){ return color(d.homecontinent) }) line 52
