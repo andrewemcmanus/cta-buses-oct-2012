@@ -90,7 +90,7 @@ d3.select("svg")
     .attr('y1', function(d){ return height - size(d) } )
     .attr('y2', function(d){ return height - size(d) } )
     .attr('stroke', 'black')
-    .style('stroke-dasharray', ('2,2'))
+    .style('stroke-dasharray', ('2,2'));
 
 d3.select("svg")
   .selectAll("legend")
