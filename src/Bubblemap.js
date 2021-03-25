@@ -54,7 +54,6 @@ d3.select("svg")
     .attr("cx", function(d){ return projection([+d.homelon, +d.homelat])[0] })
     .attr("cy", function(d){ return projection([+d.homelon, +d.homelat])[1] })
     .attr("r", function(d){ return size(+d.n) })
-
     .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
     .attr("stroke-width", 1)
     .attr("fill-opacity", .4);
