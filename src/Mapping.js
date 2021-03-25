@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
+import { csv } from 'd3';
 import * as d3 from 'd3';
 
 // "GROUPDATA" is undefined in d3
 
 const Mapping = () => {
-  const [rows, setRows] = useState([])
+  const [rows, setRows] = useState([]);
+  const [coordinates, setCoordinates] = useState();
   useEffect(() => {
-    async function getData() {
-      const response = await fetch('./coordinates.csv')
-      const reader = response.body.getReader()
-      const result = await reader.read() // raw array
-      const decoder = new TextDecoder('utf-8')
-      const csv = decoder.decode(result.value) // the csv text
-      const results = Papa.parse(csv, { header: true }) // object with { data, errors, meta }
-      const rows = results.data // array of objects
-      // console.log(rows);
-      setRows(rows)
-    }
-    getData()
+    d3.csv('./coordinates.csv').then(coordinates => {
+      setCoordinates(coordinates);
+      console.log(coordinates);
+    })
+    // async function getData() {
+    //   const response = await csv('./coordinates.csv')
+    //   const reader = response.body.getReader()
+    //   // console.log(reader);
+    //   const result = await reader.read() // raw array
+    //   const decoder = new TextDecoder('utf-8')
+    //   const csv = decoder.decode(result.value) // the csv text
+    //   const results = Papa.parse(csv, { header: true }) // object with { data, errors, meta }
+    //   const rows = results.data // array of objects
+    //   // console.log(rows);
+    //   setRows(rows)
+    // }
+    // getData()
   }, []) // [] means just do this once, after initial render
   return (
     <div className="app">
