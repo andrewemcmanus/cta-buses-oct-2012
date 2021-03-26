@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 import { csv } from 'd3';
+// csv or fetch?
 import * as d3 from 'd3';
 
 // "GROUPDATA" is undefined in d3
