@@ -3,6 +3,7 @@ import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
 
 // "GROUPDATA" is undefined in d3.js
+// ***this problem is independent of the components***
 
 // import axios from 'axios';
 // import queue from 'd3-queue';

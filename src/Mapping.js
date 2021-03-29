@@ -5,6 +5,7 @@ import { csv } from 'd3';
 import * as d3 from 'd3';
 
 // "GROUPDATA" is undefined in d3
+// ***this problem is independent of the components***
 
 const Mapping = () => {
   const [rows, setRows] = useState([]);
