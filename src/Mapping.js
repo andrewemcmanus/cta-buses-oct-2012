@@ -9,11 +9,12 @@ import coords from './coordinates.csv'
 // ***this problem is independent of the components***
 
 // d3.csv is not pairing the coordinates correctly...
-// Is papaparse necessary? 
+// Is papaparse necessary?
 
 const Mapping = () => {
   const [rows, setRows] = useState([]);
-  const [coordinates, setCoordinates] = useState();
+  const [coordinates, setCoordinates] = useState([]);
+  const [data, setData] = useState([]);
   // console.log(coords);
   useEffect(() => {
     let coordinates = coords;
@@ -28,12 +29,15 @@ const Mapping = () => {
             });
         });
     };
+
     async function getCsvData() {
       let csvData = await fetchCsv();
       // console.log(csvData);
-      Papa.parse(csvData, { complete: this.getData.bind(this)})
+      setCoordinates(csvData);
+      // Papa.parse(csvData, { complete: this.setData.bind(this)})
     };
     getCsvData();
+    // console.log(coordinates);
     // console.log(result);
     // d3.csv(coordinates, function(d) {
       // console.log(d[3]);
