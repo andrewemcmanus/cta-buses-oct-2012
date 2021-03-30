@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as d3 from 'd3';
-import Bubblemap from './Bubblemap.js';
+// import Bubblemap from './Bubblemap.js';
 import Mapping from './Mapping.js'
 import reportWebVitals from './reportWebVitals';
 import rd3 from 'react-d3-library';
@@ -21,8 +21,8 @@ const App = () => {
     let coordinates = coords;
     d3.csv(coordinates, function(coordinates) {
       // const pairs = coordinates.values();
+      // console.log(pairs);
       setCoordinates(coordinates);
-      console.log(coordinates);
     })
   }, []);
 
