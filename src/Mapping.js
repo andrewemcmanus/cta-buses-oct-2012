@@ -13,10 +13,11 @@ import coords from './coordinates.csv'
 const Mapping = () => {
   const [rows, setRows] = useState([]);
   const [coordinates, setCoordinates] = useState();
+  // console.log(coords);
   useEffect(() => {
     let coordinates = coords;
     d3.csv(coordinates, function(d) {
-      console.log(d[3]);
+      // console.log(d[3]);
       return d;
       // setCoordinates(coordinates);
       // console.log(coordinates);
