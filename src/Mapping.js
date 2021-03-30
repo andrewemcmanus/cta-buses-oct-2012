@@ -9,6 +9,7 @@ import coords from './coordinates.csv'
 // ***this problem is independent of the components***
 
 // d3.csv is not pairing the coordinates correctly...
+// Is papaparse necessary? 
 
 const Mapping = () => {
   const [rows, setRows] = useState([]);
@@ -16,9 +17,27 @@ const Mapping = () => {
   // console.log(coords);
   useEffect(() => {
     let coordinates = coords;
-    d3.csv(coordinates, function(d) {
+    function fetchCsv() {
+        return fetch(coordinates).then(function (response) {
+            let reader = response.body.getReader();
+            let decoder = new TextDecoder('utf-8');
+            // console.log(reader);
+            // console.log(decoder);
+            return reader.read().then(function (result) {
+                return decoder.decode(result.value);
+            });
+        });
+    };
+    async function getCsvData() {
+      let csvData = await fetchCsv();
+      // console.log(csvData);
+      Papa.parse(csvData, { complete: this.getData.bind(this)})
+    };
+    getCsvData();
+    // console.log(result);
+    // d3.csv(coordinates, function(d) {
       // console.log(d[3]);
-      return d;
+      // return d;
       // setCoordinates(coordinates);
       // console.log(coordinates);
       // const reader = coordinates.getReader();
@@ -33,7 +52,7 @@ const Mapping = () => {
       // const rows = results.data // array of objects
       // console.log(rows);
       // setRows(rows)
-    });
+    // });
 
     // async function getData() {
 
@@ -65,16 +84,7 @@ export default Mapping;
 //         this.getCsvData();
 //     }
 //
-//     fetchCsv() {
-//         return fetch('../coordinates.csv').then(function (response) {
-//             let reader = response.body.getReader();
-//             let decoder = new TextDecoder('utf-8');
-//
-//             return reader.read().then(function (result) {
-//                 return decoder.decode(result.value);
-//             });
-//         });
-//     }
+
 //
 //     getData(result) {
 //         this.setState({data: result.data});
