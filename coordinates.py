@@ -16,6 +16,8 @@ values = list(values)
 df = pd.DataFrame(values)
 # location column:
 
+# RECONSTRUCT USING pd.DataFrame!!
+
 # stop Id column:
 # print(df[0])
 # ast.literal_eval(df[8])
@@ -29,7 +31,7 @@ def latlong_js():
         else:
             dict = ast.literal_eval(i)
             locations.append(dict)
-    print(locations)
+    # print(locations)
     # do I even need to convert to floats here??
     # save as basic JSON?? No need to use CSV at all?
     for i in locations:
@@ -37,9 +39,10 @@ def latlong_js():
         long = float(i['longitude'])
         latlong.append([lat, long])
     coordinates = np.array(latlong)
+    # print(coordinates)
     return coordinates
 result = latlong_js()
-# print(result)
-# result.to_csv('coordinates_modified.csv')
+print(result)
+result.to_csv('coordinates_modified.csv')
 # better way than savetxt?
 # savetxt('coordinates.csv', result, delimiter=',')
