@@ -14,15 +14,18 @@ values = list(values)
 
 # LOCATION = 8
 df = pd.DataFrame(values)
+# print(df[0])
 # location column:
 
-# RECONSTRUCT USING pd.DataFrame!!
+# RECONSTRUCT USING pd.DataFrame?
 
 # stop Id column:
 # print(df[0])
-# ast.literal_eval(df[8])
+# stop_ids = ast.literal_eval(df[0])
+print(df[0])
 def latlong_js():
     location_list = list(df[8])
+    # print(location_list)
     locations = []
     latlong = []
     for i in location_list:
@@ -41,8 +44,8 @@ def latlong_js():
     coordinates = np.array(latlong)
     # print(coordinates)
     return coordinates
-result = latlong_js()
-print(result)
-result.to_csv('coordinates_modified.csv')
+# result = latlong_js()
+# print(result)
+# result.to_csv('coordinates_modified.csv')
 # better way than savetxt?
 # savetxt('coordinates.csv', result, delimiter=',')
