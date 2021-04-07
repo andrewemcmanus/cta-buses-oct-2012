@@ -17,7 +17,7 @@ df = pd.DataFrame(values)
 # location column:
 
 # stop Id column:
-# print(df[0])
+print(df[4])
 # ast.literal_eval(df[8])
 # df[4] boardings
 # df[5] alightings
@@ -31,7 +31,7 @@ def board_js():
             bd = float(i)
             board_floats.append(bd)
     boardings = np.array(board_floats)
-    print(boardings)
+    # print(boardings)
     return boardings
 def alight_js():
     alight = list(df[5])
@@ -43,11 +43,11 @@ def alight_js():
             fl = float(i)
             alight_floats.append(fl)
     alightings = np.array(alight_floats)
-    print(alightings)
     return alightings
-result_board = board_js()
+# result_board = board_js()
 # result_alight = alight_js()
-# print(result)
+# print(result_board)
+# print(result_alight)
 # result.to_csv('board_alight_modified.csv')
 # savetxt('boardings.csv', result_board, delimiter=',')
 # savetxt('alightings.csv', result_alight, delimiter=',')
