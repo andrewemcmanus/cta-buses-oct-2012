@@ -121,7 +121,6 @@ var features = dataGeo.features;
 
 export default function ready(error) {
 
-  // const dataGeo = axios.get("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
   // Create a color scale
 
   // console.log(svg);

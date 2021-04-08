@@ -18,13 +18,16 @@ const Mapping = () => {
   // console.log(coords);
   useEffect(() => {
     let coordinates = coords;
+    // console.log(coordinates);
     function fetchCsv() {
         return fetch(coordinates).then(function (response) {
+          // console.log(response.body);
             let reader = response.body.getReader();
             let decoder = new TextDecoder('utf-8');
             // console.log(reader);
             // console.log(decoder);
             return reader.read().then(function (result) {
+                // console.log(result.value);
                 return decoder.decode(result.value);
             });
         });
@@ -34,6 +37,7 @@ const Mapping = () => {
       let csvData = await fetchCsv();
       // console.log(csvData);
       setCoordinates(csvData);
+      // console.log(coordinates);
       // Papa.parse(csvData, { complete: this.setData.bind(this)})
     };
     getCsvData();
