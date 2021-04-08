@@ -19,48 +19,51 @@ const Mapping = () => {
   useEffect(() => {
     let coordinates = coords;
     // console.log(coordinates);
-    function fetchCsv() {
-        return fetch(coordinates).then(function (response) {
-          // console.log(response.body);
-            let reader = response.body.getReader();
-            let decoder = new TextDecoder('utf-8');
-            // console.log(reader);
-            // console.log(decoder);
-            return reader.read().then(function (result) {
-                // console.log(result.value);
-                return decoder.decode(result.value);
-            });
-        });
-    };
-
-    async function getCsvData() {
-      let csvData = await fetchCsv();
-      // console.log(csvData);
-      setCoordinates(csvData);
-      // console.log(coordinates);
-      // Papa.parse(csvData, { complete: this.setData.bind(this)})
-    };
-    getCsvData();
+    // function fetchCsv() {
+    //     return fetch(coordinates).then(function (response) {
+    //       // console.log(response.body);
+    //         let reader = response.body.getReader();
+    //         let decoder = new TextDecoder('utf-8');
+    //         // console.log(reader);
+    //         // console.log(decoder);
+    //         return reader.read().then(function (result) {
+    //             // console.log(result.value);
+    //             return decoder.decode(result.value);
+    //         });
+    //     });
+    // };
+    //
+    // async function getCsvData() {
+    //   let csvData = await fetchCsv();
+    //   // console.log(csvData);
+    //   setCoordinates(csvData);
+    //   // console.log(coordinates);
+    //   // Papa.parse(csvData, { complete: this.setData.bind(this)})
+    // };
+    // getCsvData();
     // console.log(coordinates);
     // console.log(result);
-    // d3.csv(coordinates, function(d) {
-      // console.log(d[3]);
+    d3.csv(coordinates, function(d) {
+      console.log(d[3]);
       // return d;
-      // setCoordinates(coordinates);
+      setCoordinates(coordinates);
       // console.log(coordinates);
-      // const reader = coordinates.getReader();
-      // const response = coordinates;
+      let reader = coordinates.getReader();
+      let response = coordinates;
       // console.log(response);
-      // const reader = response.body.getReader()
-      // // console.log(reader);
-      // const result = reader.read() // raw array
-      // const decoder = new TextDecoder('utf-8')
-      // const csv = decoder.decode(result.value) // the csv text
-      // const results = Papa.parse(csv, { header: true }) // object with { data, errors, meta }
-      // const rows = results.data // array of objects
-      // console.log(rows);
-      // setRows(rows)
-    // });
+      const reader = response.body.getReader()
+      // console.log(reader);
+      const result = reader.read() // raw array
+      console.log(result);
+      const decoder = new TextDecoder('utf-8')
+      const csv = decoder.decode(result.value) // the csv text
+      console.log(csv);
+      const results = Papa.parse(csv, { header: true }) // object with { data, errors, meta }
+      const rows = results.data // array of objects
+      console.log(rows);
+      setRows(rows);
+      return coordinates;
+    });
 
     // async function getData() {
 
