@@ -19,9 +19,10 @@ var svg = d3.select("svg"),
 // Map and projection
 var projection = d3.geo.mercator()
     .center([0,20])                // GPS of location to zoom on
-    .scale(99)                       // This is like the zoom
+    .scale(99)                       // Zoom in
     .translate([ width/2, height/2 ]);
-
+// Test with different URLs?
+// Is there an existing GeoJSON file of Chicago streets?
 var dataGeo = d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
 // console.log(dataGeo.response);
 var data = d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv");
@@ -31,7 +32,7 @@ var data = d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/mas
 //   .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")  // World shape
 //   .defer(d3.csv, ) // Position of circles
 //   .await(ready);
-// FORMAT FOR dataGeo AND data
+// FORMAT FOR dataGeo AND data?
 
 d3.select("svg")
     .append("g")
