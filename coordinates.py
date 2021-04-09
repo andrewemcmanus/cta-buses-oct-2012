@@ -22,7 +22,7 @@ df = pd.DataFrame(values)
 # stop Id column:
 # print(df[0])
 # stop_ids = ast.literal_eval(df[0])
-print(df[0])
+# print(df[0])
 def latlong_js():
     location_list = list(df[8])
     # print(location_list)
@@ -44,8 +44,8 @@ def latlong_js():
     coordinates = np.array(latlong)
     # print(coordinates)
     return coordinates
-# result = latlong_js()
+result = latlong_js()
 # print(result)
-# result.to_csv('coordinates_modified.csv')
+pd.DataFrame[result].to_csv('coordinates_modified.csv', header=None, index=None)
 # better way than savetxt?
 # savetxt('coordinates.csv', result, delimiter=',')
