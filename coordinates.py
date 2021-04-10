@@ -45,7 +45,7 @@ def latlong_js():
     # print(coordinates)
     return coordinates
 result = latlong_js()
-# print(result)
-pd.DataFrame[result].to_csv('coordinates_modified.csv', header=None, index=None)
+print(result)
+result.to_csv('coordinates_modified.csv', header=None, index=None)
 # better way than savetxt?
-# savetxt('coordinates.csv', result, delimiter=',')
+# savetxt('coordinates_modified.csv', result, delimiter=',')
