@@ -17,18 +17,25 @@ import csvData from './stop_id-board-alight-location.csv'
 
 const App = () => {
   const [ coordinates, setCoordinates ] = useState([]);
+  const [boardings, setBoardings ] = useState([]);
   useEffect(() => {
-    // console.log(csvData);
     // let coordinates = csvData;
     d3.csv(csvData, function(csvData) {
+      // console.log(csvData[0]);
       const locationObject = csvData[0].location;
+      const boardObject = parseFloat(csvData[0].boardings);
+      console.log(boardObject);
       let doubleObject = locationObject.replaceAll("'", '"')
       // let newObject = JSON.stringify(doubleObject);
       let location = JSON.parse(doubleObject);
       // console.log(location);
-      const coordinates = Object.values(location);
+      const coordstrings = Object.values(location);
+      let lat = parseFloat(coordstrings[0]);
+      let long = parseFloat(coordstrings[1]);
+      const coordinates = [lat, long];
       console.log(coordinates);
       // still strings...
+      setBoardings(boardObject);
       setCoordinates(coordinates);
     })
   }, []);
