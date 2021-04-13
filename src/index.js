@@ -28,7 +28,7 @@ const App = () => {
       // console.log(location);
       const coordinates = Object.values(location);
       console.log(coordinates);
-      // still strings
+      // still strings...
       setCoordinates(coordinates);
     })
   }, []);
