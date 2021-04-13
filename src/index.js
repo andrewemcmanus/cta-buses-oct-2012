@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as d3 from 'd3';
 // import Bubblemap from './Bubblemap.js';
-import Mapping from './Mapping.js'
+// import Mapping from './Mapping.js'
 import reportWebVitals from './reportWebVitals';
 import rd3 from 'react-d3-library';
 // import { geoMercator } from 'd3';
 // import { csv } from 'd3-request';
-import coords from './coordinates.csv'
+import csvData from './stop_id-board-alight-location.csv'
 // const rd3 = require('react-d3-library');
 // import App from './App';
 
@@ -18,16 +18,23 @@ import coords from './coordinates.csv'
 const App = () => {
   const [ coordinates, setCoordinates ] = useState([]);
   useEffect(() => {
-    let coordinates = coords;
-    d3.csv(coordinates, function(coordinates) {
-      // const pairs = coordinates.values();
-      // console.log(pairs);
+    // console.log(csvData);
+    // let coordinates = csvData;
+    d3.csv(csvData, function(csvData) {
+      const locationObject = csvData[0].location;
+      let doubleObject = locationObject.replaceAll("'", '"')
+      // let newObject = JSON.stringify(doubleObject);
+      let location = JSON.parse(doubleObject);
+      // console.log(location);
+      const coordinates = Object.values(location);
+      console.log(coordinates);
+      // still strings
       setCoordinates(coordinates);
     })
   }, []);
 
   return (
-    <div><Mapping /></div>
+    <div><h1>Test</h1></div>
   )
 }
 
