@@ -17,14 +17,15 @@ import csvData from './stop_id-board-alight-location.csv'
 
 const App = () => {
   const [ coordinates, setCoordinates ] = useState([]);
-  const [boardings, setBoardings ] = useState([]);
+  const [ boardings, setBoardings ] = useState([]);
   useEffect(() => {
     // let coordinates = csvData;
     d3.csv(csvData, function(csvData) {
       // console.log(csvData[0]);
-      const locationObject = csvData[0].location;
-      const boardObject = parseFloat(csvData[0].boardings);
-      console.log(boardObject);
+      let i = 175;
+      const locationObject = csvData[i].location;
+      const boardObject = parseFloat(csvData[i].boardings);
+      // console.log(boardObject);
       let doubleObject = locationObject.replaceAll("'", '"')
       // let newObject = JSON.stringify(doubleObject);
       let location = JSON.parse(doubleObject);
@@ -33,7 +34,7 @@ const App = () => {
       let lat = parseFloat(coordstrings[0]);
       let long = parseFloat(coordstrings[1]);
       const coordinates = [lat, long];
-      console.log(coordinates);
+      // console.log(coordinates);
       // still strings...
       setBoardings(boardObject);
       setCoordinates(coordinates);
@@ -41,7 +42,10 @@ const App = () => {
   }, []);
 
   return (
-    <div><h1>Test</h1></div>
+    <div>\
+      <p>Location is: { coordinates[0] }, { coordinates[1] }</p>
+      <p>Boardings are: { boardings }</p>
+  </div>
   )
 }
 
