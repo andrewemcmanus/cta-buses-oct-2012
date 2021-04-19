@@ -22,7 +22,7 @@ const App = () => {
     // let coordinates = csvData;
     d3.csv(csvData, function(csvData) {
       // console.log(csvData[0]);
-      let i = 175;
+      let i = Math.floor(Math.random() * csvData.length);
       const locationObject = csvData[i].location;
       const boardObject = parseFloat(csvData[i].boardings);
       // console.log(boardObject);
@@ -42,7 +42,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>\
+    <div>
       <p>Location is: { coordinates[0] }, { coordinates[1] }</p>
       <p>Boardings are: { boardings }</p>
   </div>
