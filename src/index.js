@@ -11,7 +11,7 @@ import rd3 from 'react-d3-library';
 import csvData from './stop_id-board-alight-location.csv'
 // const rd3 = require('react-d3-library');
 // import App from './App';
-
+import streets from './streets.topojson'
 // const RD3Component = rd3.Component;
 // import {withRouter} from 'react-router-dom';
 
@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     // let coordinates = csvData;
     d3.csv(csvData, function(csvData) {
-      // console.log(csvData[0]);
+      // console.log(csvData);
       let i = Math.floor(Math.random() * csvData.length);
       const locationObject = csvData[i].location;
       const boardObject = parseFloat(csvData[i].boardings);
@@ -34,12 +34,13 @@ const App = () => {
       let lat = parseFloat(coordstrings[0]);
       let long = parseFloat(coordstrings[1]);
       const coordinates = [lat, long];
-      // console.log(coordinates);
-      // still strings...
+      console.log(coordinates);
       setBoardings(boardObject);
       setCoordinates(coordinates);
     })
   }, []);
+  // Do I need to make an entirely new array? Or can this just run with a new i each time?
+
 
   return (
     <div>
