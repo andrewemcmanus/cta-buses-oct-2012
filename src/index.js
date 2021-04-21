@@ -19,23 +19,32 @@ const App = () => {
   const [ coordinates, setCoordinates ] = useState([]);
   const [ boardings, setBoardings ] = useState([]);
   useEffect(() => {
+    // let i = Math.floor(Math.random() * csvData.length);
     // let coordinates = csvData;
     d3.csv(csvData, function(csvData) {
-      // console.log(csvData);
-      // let i = Math.floor(Math.random() * csvData.length);
-      const locationObject = csvData[i].location;
-      const boardObject = parseFloat(csvData[i].boardings);
-      // console.log(boardObject);
-      let doubleObject = locationObject.replaceAll("'", '"')
-      // let newObject = JSON.stringify(doubleObject);
-      let location = JSON.parse(doubleObject);
-      // console.log(location);
-      const coordstrings = Object.values(location);
-      let lat = parseFloat(coordstrings[0]);
-      let long = parseFloat(coordstrings[1]);
-      const coordinates = [lat, long];
-      console.log(coordinates);
-      setBoardings(boardObject);
+      console.log(csvData[0]);
+      const coordinates = [];
+      const boardings = [];
+      let i = 1;
+      // console.log(length);
+      while (i < 200) {
+        // console.log(csvData[i].boardings);
+        let boardObject = csvData[i].boardings;
+        let boardFloat = parseFloat(boardObject);
+        boardings.push(boardFloat);
+        // console.log(boardObject);
+
+        let locationObject = csvData[i].location;
+        let doubleObject = locationObject.replaceAll("'", '"')
+        let location = JSON.parse(doubleObject);
+        const coordstrings = Object.values(location);
+        let lat = parseFloat(coordstrings[0]);
+        let long = parseFloat(coordstrings[1]);
+        coordinates.push([lat, long]);
+        i++;
+      }
+      // console.log(boardings);
+      setBoardings(boardings);
       setCoordinates(coordinates);
     })
   }, []);
@@ -43,7 +52,7 @@ const App = () => {
 
   return (
     <div>
-      <p>Location is: { coordinates[0] }, { coordinates[1] }</p>
+      <p>Location is: { coordinates }</p>
       <p>Boardings are: { boardings }</p>
     </div>
   )
