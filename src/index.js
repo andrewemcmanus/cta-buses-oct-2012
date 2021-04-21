@@ -22,7 +22,7 @@ const App = () => {
     // let coordinates = csvData;
     d3.csv(csvData, function(csvData) {
       // console.log(csvData);
-      let i = Math.floor(Math.random() * csvData.length);
+      // let i = Math.floor(Math.random() * csvData.length);
       const locationObject = csvData[i].location;
       const boardObject = parseFloat(csvData[i].boardings);
       // console.log(boardObject);
@@ -41,12 +41,11 @@ const App = () => {
   }, []);
   // Do I need to make an entirely new array? Or can this just run with a new i each time?
 
-
   return (
     <div>
       <p>Location is: { coordinates[0] }, { coordinates[1] }</p>
       <p>Boardings are: { boardings }</p>
-  </div>
+    </div>
   )
 }
 
