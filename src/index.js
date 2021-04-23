@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as d3 from 'd3';
+// import { geoProjection } from 'd3-geo-projection';
 // import Bubblemap from './Bubblemap.js';
 // import Mapping from './Mapping.js'
 import reportWebVitals from './reportWebVitals';
@@ -19,15 +20,15 @@ const App = () => {
   const [ coordinates, setCoordinates ] = useState([]);
   const [ boardings, setBoardings ] = useState([]);
   useEffect(() => {
-    // let i = Math.floor(Math.random() * csvData.length);
+
     // let coordinates = csvData;
     d3.csv(csvData, function(csvData) {
-      console.log(csvData[0]);
+      // console.log(csvData[0]);
       const coordinates = [];
       const boardings = [];
-      let i = 1;
+      let i = 0;
       // console.log(length);
-      while (i < 200) {
+      while (i < csvData.length) {
         // console.log(csvData[i].boardings);
         let boardObject = csvData[i].boardings;
         let boardFloat = parseFloat(boardObject);
@@ -48,12 +49,28 @@ const App = () => {
       setCoordinates(coordinates);
     })
   }, []);
-  // Do I need to make an entirely new array? Or can this just run with a new i each time?
+  // BOARDINGS: scale to radius of circle
+  // COORDINATES: scale to area of page
+  let a = Math.floor(Math.random() * csvData.length);
+  // let projection = d3.projection(coordinates[a])
+  const RD3Component = rd3.Component;
+  // The svg
+  // var svg = d3.select("svg"),
+  //     width = +svg.attr("boardings"),
+  //     height = +svg.attr("boardings");
+  // console.log(boardings);
+
+  // Map and projection
+  var projection = d3.geo.mercator()
+      .center(coordinates)                // GPS of location to zoom on
+      .scale(99)                       // Zoom in
+      // .translate([ boardings[a], boardings[a] ]);
+  console.log(coordinates);
 
   return (
     <div>
-      <p>Location is: { coordinates }</p>
-      <p>Boardings are: { boardings }</p>
+      <p>Location is: { coordinates[a] }</p>
+      <p>Boardings are: { boardings[a] }</p>
     </div>
   )
 }

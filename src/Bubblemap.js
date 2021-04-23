@@ -23,9 +23,9 @@ var projection = d3.geo.mercator()
     .translate([ width/2, height/2 ]);
 // Test with different URLs?
 // Is there an existing GeoJSON file of Chicago streets?
-var dataGeo = d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
+// var dataGeo = d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
 // console.log(dataGeo.response);
-var data = d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv");
+// var data = d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv");
 // console.log(data.response);
 // d3.queue()
 
