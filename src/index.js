@@ -39,6 +39,8 @@ const App = () => {
         let locationObject = csvData[i].location;
         let doubleObject = locationObject.replaceAll("'", '"')
         let location = JSON.parse(doubleObject);
+        // location.latitude = +location.latitude;
+        // location.longitude = +location.longitude;
         const coordstrings = Object.values(location);
         let lat = parseFloat(coordstrings[0]);
         let long = parseFloat(coordstrings[1]);
@@ -46,13 +48,14 @@ const App = () => {
         // d3 requires long-lat format
         i++;
       }
-      // console.log(boardings);
       setBoardings(boardings);
       setCoordinates(coordinates);
     })
   }, []);
   // BOARDINGS: scale to radius of circle
   // COORDINATES: scale to area of page
+  // would +coordinates.long, +coordinates.lat work instead of the simple array?
+
   let a = Math.floor(Math.random() * csvData.length);
   // let projection = d3.projection(coordinates[a])
   const RD3Component = rd3.Component;
@@ -65,7 +68,7 @@ const App = () => {
   // Map and projection
     var width = boardings[a];
     var height = boardings[a];
-    var projection = d3.geo.mercator().center(coordinates).scale(680).translate([width / 2, height / 2]);
+    var projection = d3.geo.mercator().center(coordinates).scale(99).translate([width / 2, height / 2]);
     var body = d3.select("body").append("svg").attr("width", width).attr("height", height);
     var path = d3.geo.path().projection(projection);
     // console.log(width);
