@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as d3 from 'd3';
 // import { geoProjection } from 'd3-geo-projection';
+// import { projection } from 'd3-geo';
 // import Bubblemap from './Bubblemap.js';
 // import Mapping from './Mapping.js'
 import reportWebVitals from './reportWebVitals';
@@ -56,16 +57,21 @@ const App = () => {
   const RD3Component = rd3.Component;
   // The svg
   // var svg = d3.select("svg"),
-  //     width = +svg.attr("boardings"),
-  //     height = +svg.attr("boardings");
-  // console.log(boardings);
-
+      // width = +svg.attr(boardings),
+      // height = +svg.attr(boardings);
+  // console.log(width);
+  // const projection = d3.geo.projection(coordinates[a]);
   // Map and projection
-  var projection = d3.geo.mercator()
-      .center(coordinates)                // GPS of location to zoom on
-      .scale(99)                       // Zoom in
+    var width = boardings[a];
+    var height = boardings[a];
+    var projection = d3.geo.mercator().center(coordinates).scale(680).translate([width / 2, height / 2]);
+    var svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
+    var path = d3.geo.path().projection(projection);
+;
+      // .center(coordinates)                // GPS of location to zoom on
+      // .scale(99);                       // Zoom in
       // .translate([ boardings[a], boardings[a] ]);
-  console.log(coordinates);
+  console.log(path);
 
   return (
     <div>
