@@ -42,7 +42,8 @@ const App = () => {
         const coordstrings = Object.values(location);
         let lat = parseFloat(coordstrings[0]);
         let long = parseFloat(coordstrings[1]);
-        coordinates.push([lat, long]);
+        coordinates.push([long, lat]);
+        // d3 requires long-lat format
         i++;
       }
       // console.log(boardings);
@@ -65,19 +66,57 @@ const App = () => {
     var width = boardings[a];
     var height = boardings[a];
     var projection = d3.geo.mercator().center(coordinates).scale(680).translate([width / 2, height / 2]);
-    var svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
+    var body = d3.select("body").append("svg").attr("width", width).attr("height", height);
     var path = d3.geo.path().projection(projection);
-;
+    // console.log(width);
+    // console.log(path);
+    // var svg = d3.select("svg")
+    //     .append("g")
+    //     .selectAll("path")
+    //     .data(coordinates)
+    //     .enter()
+    //     .append("path")
+    //       .attr("fill", "#b8b8b8")
+    //       .attr("d", d3.geo.path()
+    //           .projection(projection)
+    //       )
+    //     .style("stroke", "none")
+    //     .style("opacity", .3);
+
+    var circles = d3.select("svg")
+      .selectAll("myCircles")
+      .data(coordinates)
+      .enter()
+      .append("circle")
+        .attr("cx", width )
+        .attr("cy", height )
+        // .attr("r", function(d){ return size(boardings) })
+        // .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
+        .attr("stroke-width", 1)
+        .attr("fill-opacity", .4);
+
+    // console.log(circles);
       // .center(coordinates)                // GPS of location to zoom on
       // .scale(99);                       // Zoom in
       // .translate([ boardings[a], boardings[a] ]);
-  console.log(path);
+    // var svg = d3.select("svg").selectAll("myCircles").data(data.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }));
+        // .enter()
+        // .append("circle")
+        //   .attr("cx", function(d){ return projection([+d.homelon, +d.homelat])[0] })
+        //   .attr("cy", function(d){ return projection([+d.homelon, +d.homelat])[1] })
+        //   .attr("r", function(d){ return size(+d.n) })
+        //   .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
+        //   .attr("stroke-width", 1)
+        //   .attr("fill-opacity", .4);
+
+  // const points = coordinates.map((coordinate) =>
+  //     <li>Location is: { coordinate[1] }, { coordinate[0] }</li>
+  // );
+  // console.log(path);
 
   return (
-    <div>
-      <p>Location is: { coordinates[a] }</p>
-      <p>Boardings are: { boardings[a] }</p>
-    </div>
+    <p>{ coordinates[a] }</p>
+    // <p>Boardings are: { boardings[a] }</p>
   )
 }
 
