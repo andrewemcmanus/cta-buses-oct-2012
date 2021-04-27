@@ -20,8 +20,8 @@ import streets from './streets.topojson'
 const App = () => {
   const [ coordinates, setCoordinates ] = useState([]);
   const [ boardings, setBoardings ] = useState([]);
+  let a = Math.floor(Math.random() * csvData.length);
   useEffect(() => {
-
     // let coordinates = csvData;
     d3.csv(csvData, function(csvData) {
       // console.log(csvData[0]);
@@ -50,13 +50,13 @@ const App = () => {
       }
       setBoardings(boardings);
       setCoordinates(coordinates);
-    })
+    });
   }, []);
   // BOARDINGS: scale to radius of circle
   // COORDINATES: scale to area of page
   // would +coordinates.long, +coordinates.lat work instead of the simple array?
 
-  let a = Math.floor(Math.random() * csvData.length);
+
   // let projection = d3.projection(coordinates[a])
   const RD3Component = rd3.Component;
   // The svg
@@ -66,12 +66,12 @@ const App = () => {
   // console.log(width);
   // const projection = d3.geo.projection(coordinates[a]);
   // Map and projection
-    var width = boardings[a];
-    var height = boardings[a];
-    var projection = d3.geo.mercator().center(coordinates).scale(99).translate([width / 2, height / 2]);
-    var body = d3.select("body").append("svg").attr("width", width).attr("height", height);
-    var path = d3.geo.path().projection(projection);
-    // console.log(width);
+  const width = boardings[a];
+  const height = boardings[a];
+  const projection = d3.geo.mercator().center(coordinates).scale(99).translate([width / 2, height / 2]);
+  const body = d3.select("body").append("svg").attr("width", width).attr("height", height);
+  const path = d3.geo.path().projection(projection);
+  // console.log(projection);
     // console.log(path);
     // var svg = d3.select("svg")
     //     .append("g")
@@ -85,18 +85,18 @@ const App = () => {
     //       )
     //     .style("stroke", "none")
     //     .style("opacity", .3);
-
-    var circles = d3.select("svg")
-      .selectAll("myCircles")
-      .data(coordinates)
-      .enter()
-      .append("circle")
-        .attr("cx", width )
-        .attr("cy", height )
-        // .attr("r", function(d){ return size(boardings) })
-        // .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
-        .attr("stroke-width", 1)
-        .attr("fill-opacity", .4);
+    // console.log(projection);
+    // var circles = d3.select("svg")
+    //   .selectAll("myCircles")
+    //   .data(coordinates)
+    //   .enter()
+    //   .append("circle")
+    //     .attr("cx", width )
+    //     .attr("cy", height )
+    //     // .attr("r", function(d){ return size(boardings) })
+    //     // .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
+    //     .attr("stroke-width", 1)
+    //     .attr("fill-opacity", .4);
 
     // console.log(circles);
       // .center(coordinates)                // GPS of location to zoom on
@@ -118,7 +118,12 @@ const App = () => {
   // console.log(path);
 
   return (
-    <p>{ coordinates[a] }</p>
+    <g>
+      {coordinates.map(() => {
+          const [x, y] = projection([coordinates[0], coordinates[1]]);
+          return <circle cx={x} cy={y} r={1.5}/>
+        }) }
+    </g>
     // <p>Boardings are: { boardings[a] }</p>
   )
 }
