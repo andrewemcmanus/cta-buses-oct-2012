@@ -71,6 +71,12 @@ const App = () => {
   const projection = d3.geo.mercator().center(coordinates).scale(99).translate([width / 2, height / 2]);
   const body = d3.select("body").append("svg").attr("width", width).attr("height", height);
   const path = d3.geo.path().projection(projection);
+  const valueExtent = d3.extent(boardings, function(d) { return +d.n; })
+  console.log(valueExtent);
+  const size = d3.scale.sqrt()
+    .domain(valueExtent)  // What's in the data
+    .range([ 1, 50])  // Size in pixel
+  console.log(size);
   // console.log(projection);
     // console.log(path);
     // var svg = d3.select("svg")
@@ -86,13 +92,14 @@ const App = () => {
     //     .style("stroke", "none")
     //     .style("opacity", .3);
     // console.log(projection);
-    // var circles = d3.select("svg")
+    const [x, y] = projection(coordinates);
+    // const circles = d3.select("svg")
     //   .selectAll("myCircles")
     //   .data(coordinates)
     //   .enter()
     //   .append("circle")
-    //     .attr("cx", width )
-    //     .attr("cy", height )
+    //     .attr("cx", x )
+    //     .attr("cy", y )
     //     // .attr("r", function(d){ return size(boardings) })
     //     // .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
     //     .attr("stroke-width", 1)
@@ -102,15 +109,17 @@ const App = () => {
       // .center(coordinates)                // GPS of location to zoom on
       // .scale(99);                       // Zoom in
       // .translate([ boardings[a], boardings[a] ]);
-    // var svg = d3.select("svg").selectAll("myCircles").data(data.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }));
-        // .enter()
-        // .append("circle")
-        //   .attr("cx", function(d){ return projection([+d.homelon, +d.homelat])[0] })
-        //   .attr("cy", function(d){ return projection([+d.homelon, +d.homelat])[1] })
-        //   .attr("r", function(d){ return size(+d.n) })
-        //   .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
-        //   .attr("stroke-width", 1)
-        //   .attr("fill-opacity", .4);
+
+    var circles = d3.select("svg").selectAll("myCircles").data(coordinates.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
+        .enter()
+        .append("circle")
+          .attr("cx", function(d){ return projection([+d.homelon, +d.homelat])[0] })
+          .attr("cy", function(d){ return projection([+d.homelon, +d.homelat])[1] })
+          .attr("r", function(d){ return size(boardings) })
+          .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
+          .attr("stroke-width", 1)
+          .attr("fill-opacity", .4);
+    console.log(circles);
 
   // const points = coordinates.map((coordinate) =>
   //     <li>Location is: { coordinate[1] }, { coordinate[0] }</li>
@@ -120,8 +129,7 @@ const App = () => {
   return (
     <g>
       {coordinates.map(() => {
-          const [x, y] = projection([coordinates[0], coordinates[1]]);
-          return <circle cx={x} cy={y} r={1.5}/>
+          return <circles cx={x} cy={y} r={1.5}/>
         }) }
     </g>
     // <p>Boardings are: { boardings[a] }</p>
