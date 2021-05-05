@@ -67,54 +67,58 @@ const App = () => {
   // console.log(width);
   // const projection = d3.geo.projection(coordinates[a]);
   // Map and projection
-  
+
+// CHECK d3.extent, d3.select (for "svg")
+
+
   // COORDINATES: returning NaN when passed through here
   const width = boardings[a];
   const height = boardings[a];
-  const projection = d3.geo.mercator().center(coordinates).scale(99).translate([width / 2, height / 2]);
+  const projection = d3.geo.mercator().center(coordinates).scale(99).translate([width / 2, height / 2])
   const body = d3.select("body").append("svg").attr("width", width).attr("height", height);
   const path = d3.geo.path().projection(projection);
   const valueExtent = d3.extent(boardings, function(d) { return +d.n; })
-  // console.log(valueExtent);
+  // console.log(width);
   const size = d3.scale.sqrt()
     .domain(valueExtent)  // What's in the data
-    .range([ 1, 50])  // Size in pixel
+    .range([ 1, 50]);  // Size in pixel
   // console.log(size);
-  // console.log(projection);
+  // console.log(path());
     // console.log(path);
-    // var svg = d3.select("svg")
+    // const svg = d3.select("svg")
     //     .append("g")
     //     .selectAll("path")
     //     .data(coordinates)
     //     .enter()
     //     .append("path")
     //       .attr("fill", "#b8b8b8")
-    //       .attr("d", d3.geo.path()
-    //           .projection(projection)
-    //       )
+    //       .attr("d", path())
     //     .style("stroke", "none")
     //     .style("opacity", .3);
-    // console.log(projection);
+    // console.log(svg[0].parentNode.children);
+    // const [x, y] = projection;
+    // console.log(x);
+    const circles = d3.select("svg")
+      .selectAll("myCircles")
+      .data(coordinates)
+      .enter()
+      .append("circle")
+        .attr("cx", projection()[0] )
+        .attr("cy", projection()[1] )
+        .attr("r", function(d){ return size(boardings) })
+        .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
+        .attr("stroke-width", 1)
+        .attr("fill-opacity", .4);
 
-    // console.log(projection(coordinates));
-    // const circles = d3.select("svg")
-    //   .selectAll("myCircles")
-    //   .data(coordinates)
-    //   .enter()
-    //   .append("circle")
-    //     .attr("cx", x )
-    //     .attr("cy", y )
-    //     // .attr("r", function(d){ return size(boardings) })
-    //     // .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
-    //     .attr("stroke-width", 1)
-    //     .attr("fill-opacity", .4);
-
-    // console.log(circles);
+    console.log(circles);
       // .center(coordinates)                // GPS of location to zoom on
       // .scale(99);                       // Zoom in
       // .translate([ boardings[a], boardings[a] ]);
+      // coordinates.map(() => {
+      //     return <circle cx={coordinates[0]} cy={coordinates[1]} r={1.5}/>
+      //   })
 
-    // var circles = d3.select("svg").selectAll("myCircles").data(coordinates.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
+    // const circles = d3.select("svg").selectAll("myCircles").data(coordinates.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
     //     .enter()
     //     .append("circle")
     //       .attr("cx", function(d){ return projection([+d.homelon, +d.homelat])[0] })
@@ -123,18 +127,12 @@ const App = () => {
     //       .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
     //       .attr("stroke-width", 1)
     //       .attr("fill-opacity", .4);
+
     // console.log(circles);
-
-  // const points = coordinates.map((coordinate) =>
-  //     <li>Location is: { coordinate[1] }, { coordinate[0] }</li>
-  // );
-  // console.log(path);
-
   return (
     <div>
       {coordinates.map(() => {
-          const [x, y] = projection(coordinates);
-          return <circles cx={x} cy={y} r={1.5}/>
+          return <circle cx={coordinates[0]} cy={coordinates[1]} r={1.5}/>
         }) }
     </div>
     // <p>Boardings are: { boardings[a] }</p>
