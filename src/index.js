@@ -98,8 +98,9 @@ const App = () => {
     // console.log(svg[0].parentNode.children);
     // const [x, y] = projection;
     // console.log(x);
+    // .selectAll: shows what the DOM connection is! Is myCircles correct?
     const circles = d3.select("svg")
-      .selectAll("myCircles")
+      .selectAll("circle")
       .data(coordinates)
       .enter()
       .append("circle")
@@ -129,6 +130,7 @@ const App = () => {
     //       .attr("fill-opacity", .4);
 
     // console.log(circles);
+    // return SVG???
   return (
     <div>
       {coordinates.map(() => {
