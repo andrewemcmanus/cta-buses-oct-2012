@@ -51,51 +51,55 @@ const App = () => {
       }
       setBoardings(boardings);
       setCoordinates(coordinates);
-      const width = boardings[a];
-      const height = boardings[a];
-      const projection = d3.geo.mercator().center(coordinates).scale(99).translate([width / 2, height / 2])
-      const body = d3.select("body").append("svg").attr("width", width).attr("height", height);
-      const path = d3.geo.path().projection(projection);
-      const valueExtent = d3.extent(boardings, function(d) { return +d.n; })
-      // console.log(width);
-      const size = d3.scale.sqrt()
-        .domain(valueExtent)  // What's in the data
-        .range([ 1, 50]);  // Size in pixel
-      // console.log(size);
-      // console.log(path());
-        // console.log(path);
-        // const svg = d3.select("svg")
-        //     .append("g")
-        //     .selectAll("path")
-        //     .data(coordinates)
-        //     .enter()
-        //     .append("path")
-        //       .attr("fill", "#b8b8b8")
-        //       .attr("d", path())
-        //     .style("stroke", "none")
-        //     .style("opacity", .3);
-        // console.log(svg[0].parentNode.children);
-        // const [x, y] = projection;
-        // console.log(x);
-        // .selectAll: shows what the DOM connection is! Is myCircles correct?
-        const circles = d3.select("svg")
-          .selectAll("circle")
-          .data(coordinates)
-          .enter()
-          .append("circle")
-            .attr("cx", projection()[0] )
-            .attr("cy", projection()[1] )
-            .attr("r", function(d){ return size(boardings) })
-            .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
-            .attr("stroke-width", 1)
-            .attr("fill-opacity", .4);
-        console.log(circles);
     });
   }, []);
   // BOARDINGS: scale to radius of circle
   // COORDINATES: scale to area of page
   // would +coordinates.long, +coordinates.lat work instead of the simple array?
 
+      // console.log(coordinates);
+
+      // calling projection() returns undefined 'point' at line 4323 in d3.js
+      // check svg attributes: length vs. width, returning NaN?
+
+
+      const projection = d3.geo.mercator().center(coordinates).scale(99).translate([boardings / 50, boardings / 50])
+      const body = d3.select("body").append("svg").attr("width", boardings / 50).attr("height", boardings / 50);
+      const path = d3.geo.path().projection(projection);
+      const valueExtent = d3.extent(boardings, function(d) { return +d.n; })
+      // console.log(projection());
+      const size = d3.scale.sqrt()
+        .domain(valueExtent)  // What's in the data
+        .range([ 1, 50]);  // Size in pixel
+      // console.log(size());
+      // console.log(valueExtent);
+        // console.log(path);
+        const svg = d3.select("svg")
+            .append("g")
+            .selectAll("path")
+            .data(coordinates)
+            .enter()
+            .append("path")
+              .attr("fill", "#b8b8b8")
+              .attr("d", path())
+            .style("stroke", "none")
+            .style("opacity", .3);
+        // console.log(svg[0].parentNode.children);
+        // const [x, y] = projection;
+        // console.log(x);
+        // .selectAll: shows what the DOM connection is! Is myCircles correct?
+        // const circles = d3.select("svg")
+        //   .selectAll("circle")
+        //   .data(coordinates)
+        //   .enter()
+        //   .append("circle")
+        //     .attr("cx", projection()[0] )
+        //     .attr("cy", projection()[1] )
+        //     .attr("r", function(d){ return size(boardings) })
+        //     .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
+        //     .attr("stroke-width", 1)
+        //     .attr("fill-opacity", .4);
+        // // console.log(circles);
 
   // let projection = d3.projection(coordinates[a])
   const RD3Component = rd3.Component;
@@ -140,10 +144,9 @@ const App = () => {
           return <svg cx={coordinates[0]} cy={coordinates[1]} r={1.5}/>
         }) }
     </div>
-    // <p>Boardings are: { boardings[a] }</p>
+
   )
 }
-
 const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 
