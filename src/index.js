@@ -118,34 +118,33 @@ const App = () => {
 
 
 
-    // console.log(circles);
+    console.log(coordinates[a]);
       // .center(coordinates)                // GPS of location to zoom on
       // .scale(99);                       // Zoom in
       // .translate([ boardings[a], boardings[a] ]);
       // coordinates.map(() => {
       //     return <circle cx={coordinates[0]} cy={coordinates[1]} r={1.5}/>
       //   })
+      // WHAT IS THE VARIABLE THAT GOES INTO THE ATTRIBUTE FUNCTIONS?
 
     const circles = d3.select("svg").selectAll("myCircles").data(coordinates.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
         .enter()
         .append("circle")
-          .attr("cx", function(d){ return projection([+d.homelon, +d.homelat])[0] })
-          .attr("cy", function(d){ return projection([+d.homelon, +d.homelat])[1] })
+          .attr("cx", function(d){ return projection(coordinates)[0] })
+          .attr("cy", function(d){ return projection(coordinates)[1] })
           .attr("r", function(d){ return size(boardings) })
           .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
           .attr("stroke-width", 1)
           .attr("fill-opacity", .4);
 
-
   return (
     <div>
       {coordinates.map(() => {
           return <svg>
-            <circles cx={coordinates[0]} cy={coordinates[1]} r={1.5}/>
+            <circles cx={1} cy={1} r={30}/>
           </svg>
         }) }
     </div>
-
   )
 }
 const rootElement = document.getElementById('root');
