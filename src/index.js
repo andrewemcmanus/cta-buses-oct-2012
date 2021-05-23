@@ -63,8 +63,8 @@ const App = () => {
       // check svg attributes: length vs. width, returning NaN?
 
 
-      const projection = d3.geo.mercator().center(coordinates).scale(99).translate([boardings / 50, boardings / 50])
-      const body = d3.select("body").append("svg").attr("width", boardings / 50).attr("height", boardings / 50);
+      const projection = d3.geo.mercator().center(coordinates).scale(99).translate([300, 300])
+      const body = d3.select("body").append("svg").attr("width", 300).attr("height", 300);
       const path = d3.geo.path().projection(projection);
       const valueExtent = d3.extent(boardings, function(d) { return +d.n; })
       // console.log(projection());
@@ -126,22 +126,23 @@ const App = () => {
       //     return <circle cx={coordinates[0]} cy={coordinates[1]} r={1.5}/>
       //   })
 
-    // const circles = d3.select("svg").selectAll("myCircles").data(coordinates.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
-    //     .enter()
-    //     .append("circle")
-    //       .attr("cx", function(d){ return projection([+d.homelon, +d.homelat])[0] })
-    //       .attr("cy", function(d){ return projection([+d.homelon, +d.homelat])[1] })
-    //       .attr("r", function(d){ return size(boardings) })
-    //       .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
-    //       .attr("stroke-width", 1)
-    //       .attr("fill-opacity", .4);
+    const circles = d3.select("svg").selectAll("myCircles").data(coordinates.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
+        .enter()
+        .append("circle")
+          .attr("cx", function(d){ return projection([+d.homelon, +d.homelat])[0] })
+          .attr("cy", function(d){ return projection([+d.homelon, +d.homelat])[1] })
+          .attr("r", function(d){ return size(boardings) })
+          .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
+          .attr("stroke-width", 1)
+          .attr("fill-opacity", .4);
 
-    // console.log(circles);
-    // return SVG???
+
   return (
     <div>
       {coordinates.map(() => {
-          return <svg cx={coordinates[0]} cy={coordinates[1]} r={1.5}/>
+          return <svg>
+            <circles cx={coordinates[0]} cy={coordinates[1]} r={1.5}/>
+          </svg>
         }) }
     </div>
 
