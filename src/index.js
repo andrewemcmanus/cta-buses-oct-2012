@@ -23,7 +23,7 @@ const App = () => {
   let a = Math.floor(Math.random() * csvData.length);
   useEffect(() => {
     // let coordinates = csvData;
-    d3.csv(csvData, function(csvData) {
+    d3.csv(csvData, async function(csvData) {
       // console.log(csvData[0]);
       const coordinates = [];
       const boardings = [];
@@ -49,8 +49,8 @@ const App = () => {
         // d3 requires long-lat format
         i++;
       }
-      setBoardings(boardings);
-      setCoordinates(coordinates);
+      await setBoardings(boardings);
+      await setCoordinates(coordinates);
     });
   }, []);
   // BOARDINGS: scale to radius of circle
@@ -61,7 +61,6 @@ const App = () => {
 
       // calling projection() returns undefined 'point' at line 4323 in d3.js
       // check svg attributes: length vs. width, returning NaN?
-
 
       const projection = d3.geo.mercator().center(coordinates).scale(99).translate([300, 300])
       const body = d3.select("body").append("svg").attr("width", 300).attr("height", 300);
@@ -118,7 +117,7 @@ const App = () => {
 
 
 
-    console.log(coordinates[a]);
+    // console.log(projection(coordinates));
       // .center(coordinates)                // GPS of location to zoom on
       // .scale(99);                       // Zoom in
       // .translate([ boardings[a], boardings[a] ]);
@@ -130,8 +129,8 @@ const App = () => {
     const circles = d3.select("svg").selectAll("myCircles").data(coordinates.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
         .enter()
         .append("circle")
-          .attr("cx", function(d){ return projection(coordinates)[0] })
-          .attr("cy", function(d){ return projection(coordinates)[1] })
+          .attr("cx", function(d){ return projection(coordinates) })
+          .attr("cy", function(d){ return projection(coordinates) })
           .attr("r", function(d){ return size(boardings) })
           .attr("stroke", function(d){ if(d.n>2000){return "black"}else{return "none"}  })
           .attr("stroke-width", 1)
