@@ -101,7 +101,7 @@ const App = () => {
         // // console.log(circles);
 
   // let projection = d3.projection(coordinates[a])
-  const RD3Component = rd3.Component;
+  // const RD3Component = rd3.Component;
   // The svg
   // var svg = d3.select("svg"),
       // width = +svg.attr(boardings),
@@ -138,9 +138,9 @@ const App = () => {
 
   return (
     <div>
-      {coordinates.map(() => {
-          return <svg>
-            <circles cx={1} cy={1} r={30}/>
+      {coordinates.map((coordinates, idx) => {
+          return <svg key={idx}>
+            <circles cx={coordinates[0]} cy={coordinates[1]} />
           </svg>
         }) }
     </div>
